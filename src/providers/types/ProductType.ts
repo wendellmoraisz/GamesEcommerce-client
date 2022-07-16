@@ -1,10 +1,12 @@
 interface ProducsContextType {
     products: {
+        id: number
         name: string
         imgSRC: string
         price: number
     }[],
-    getProducts: () => Promise<void>
+    getProducts: (param: string) => Promise<void>
+    changeUrlParam: (param: string) => void
 }
 
 export default ProducsContextType;
