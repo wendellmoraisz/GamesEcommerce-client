@@ -1,5 +1,5 @@
 import { createContext, useCallback, useState, useEffect, useMemo } from "react";
-import ProductsContextType from "./types/ProductType";
+import ProductsContextType from "./types/ProductsType";
 import ContextChildrenType from "./types/ContextChildrenType";
 
 export const ProductsContext = createContext<ProductsContextType>({
@@ -17,7 +17,6 @@ const ProductsProvider = ({ children }: ContextChildrenType) => {
     const [productsState, setProductsState] = useState([]);
 
     const getProducts = async (urlParams: string = "") => {
-        console.log(urlParams);
         const results = await fetch(`http://localhost:3333/products${urlParams}`);
         const json = await results.json();
         setProductsState(json.results);
