@@ -3,6 +3,7 @@ interface Product {
     name: string
     imgSRC: string
     price: number
+    quantityInCart: number
 }
 
 export default Product;

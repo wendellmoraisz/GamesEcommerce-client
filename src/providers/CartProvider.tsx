@@ -9,27 +9,50 @@ export const CartContext = createContext<CartContextType>({
         name: "",
         imgSRC: "",
         price: 0,
+        quantityInCart: 0,
     }],
-    addToCart: () => {}
+    addToCart: () => { },
+    decrementProductQuantity: () => {},
+    removeFromCart: () => {},
 });
 
 const CartProvider = ({ children }: ContextChildrenType) => {
 
-    const [cartState , setCartState] = useState<Product[]>([]);
+    const [cartState, setCartState] = useState<Product[]>([]);
 
     const addToCart = (product: Product) => {
-        //console.log(cartState);
-        if(cartState.length > 0){
-            setCartState([...cartState, product]);
+        const hasId = cartState.filter(e => e.id === product.id).length > 0;
+
+        if (cartState.length > 0 && hasId) {
+            const newCartState = cartState.map(e => {
+                if (e.id === product.id) e.quantityInCart += 1;
+                return e;
+            });
+            setCartState(newCartState);
         } else {
-            setCartState([product]);
+            product.quantityInCart = 1;
+            setCartState([...cartState, product]);
         }
-        //x'console.log(cartState);
+    }
+
+    const decrementProductQuantity = (productId: number) => {
+        const newCartState = cartState.map(e => {
+            if (e.id === productId) e.quantityInCart -= 1;
+            return e;
+        });
+        setCartState(newCartState);
+    }
+
+    const removeFromCart = (productId: number) => {
+        const newCartState = cartState.filter(e => e.id !== productId);
+        setCartState(newCartState);
     }
 
     const contextValue = {
         products: cartState,
         addToCart,
+        decrementProductQuantity,
+        removeFromCart,
     }
 
     return (

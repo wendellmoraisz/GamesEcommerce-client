@@ -1,6 +1,7 @@
-import { createContext, useCallback, useState, useEffect, useMemo } from "react";
+import { createContext, useCallback, useState, useEffect } from "react";
 import ProductsContextType from "./types/ProductsType";
 import ContextChildrenType from "./types/ContextChildrenType";
+import Product from "./types/Product";
 
 export const ProductsContext = createContext<ProductsContextType>({
     products: [{
@@ -8,6 +9,7 @@ export const ProductsContext = createContext<ProductsContextType>({
         name: "",
         imgSRC: "",
         price: 0,
+        quantityInCart: 0
     }],
     getProducts: async (urlparam: string = "") => {},
     changeUrlParam: () => {}
@@ -19,7 +21,15 @@ const ProductsProvider = ({ children }: ContextChildrenType) => {
     const getProducts = async (urlParams: string = "") => {
         const results = await fetch(`http://localhost:3333/products${urlParams}`);
         const json = await results.json();
-        setProductsState(json.results);
+        setProductsState(json.results.map((product: Product) => (
+            {
+                id: product.id,
+                name: product.name,
+                imgSRC: product.imgSRC,
+                price: product.price,
+                quantityInCart: 0
+            }
+        )));
     }
 
     useEffect(() => {
