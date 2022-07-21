@@ -2,6 +2,7 @@ import * as S from "./styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAt, faKey, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import styled from "styled-components";
 
 const Login = () => {
 
@@ -18,6 +19,9 @@ const Login = () => {
         setInputType(newInputType);
     }
 
+    const [invalidLoginOpacity, setInvalidLoginOpacity] = useState("0");
+    const ShowLoginErrorMessage = () => setInvalidLoginOpacity("1");
+
     const sendLogin = async () => {
         const bodyRequest = { user: userEmail, password: userPassword };
         const result = await fetch("http://localhost:3333/login",{
@@ -27,7 +31,15 @@ const Login = () => {
             },
             body: JSON.stringify(bodyRequest),
         });
+
+        if (!result.ok) ShowLoginErrorMessage();
     }
+
+    const LoginError = styled.div`
+    padding: 16px;
+    background-color: #EB4747;
+    opacity: ${invalidLoginOpacity};
+    `;
 
     return (
         <S.Wrapper>
@@ -48,6 +60,7 @@ const Login = () => {
 
                     <S.LoginButton onClick={sendLogin}>Login</S.LoginButton>
                 </S.formWrapper>
+                <LoginError>Login inválido</LoginError>
             </S.Container>
 
         </S.Wrapper>
