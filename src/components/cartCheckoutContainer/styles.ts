@@ -109,3 +109,12 @@ export const TotalValue = styled.p`
     padding: 16px 0;
     margin-bottom: -24px;
 `;
+
+export const EmptyCartWrapper = styled.div`
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+`;
