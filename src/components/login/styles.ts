@@ -27,7 +27,6 @@ export const Container = styled.div`
         font-size: 1.3rem;
         padding: 10px;
         color: #ffff;
-        border-radius: 8px;
     }
     
     input {
@@ -83,7 +82,6 @@ export const InputWrapper = styled.div`
     display:flex;
     align-items: center;
     background: #002235;
-    border-radius: 8px;
     padding: 0 8px;
     margin: 30px 0;
 `;
