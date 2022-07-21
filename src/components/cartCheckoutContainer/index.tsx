@@ -3,6 +3,8 @@ import CartProducts from "../cartProducts";
 import useCart from "../../hooks/useCart";
 import { formatPrice } from "../../utils/formatPrice";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLeftLong } from "@fortawesome/free-solid-svg-icons";
 
 const CartCheckoutContainer = () => {
 
@@ -12,39 +14,49 @@ const CartCheckoutContainer = () => {
             price + nextPrice);
 
     return (
-        <S.Container>
-            <h1>Carrinho</h1>
-            <S.CheckoutWrapper>
-                <S.ProductsContainer>
-                    <S.ProductWrapper>
-                        <th>Produto</th>
-                        <th>Quantidade</th>
-                        <th>Valor</th>
-                    </S.ProductWrapper>
-                    {products.map(product => (
+        <S.CartWrapper>
+
+            <S.Container>
+                <h1>Carrinho</h1>
+                <S.CheckoutWrapper>
+                    <S.ProductsContainer>
                         <S.ProductWrapper>
-                            <CartProducts
-                                key={product.id}
-                                id={product.id}
-                                name={product.name}
-                                imgSRC={product.imgSRC}
-                                price={product.price}
-                                quantityInCart={product.quantityInCart}
-                            />
+                            <S.indexValues>Produto</S.indexValues>
+                            <S.indexValues>Quantidade</S.indexValues>
+                            <S.indexValues>Valor</S.indexValues>
                         </S.ProductWrapper>
-                    ))}
-                </S.ProductsContainer>
-                <S.ResumeWrapper>
-                    <h1>Resumo</h1>
-                    <p>Produtos: {products.length}</p>
-                    <p>
-                        Total: {formatPrice(totalValue)}
-                    </p>
-                    <button>Finalizar compra</button>
-                </S.ResumeWrapper>
-            </S.CheckoutWrapper>
-            <Link to={"/"}>continuar comprando</Link>
-        </S.Container>
+                        {products.map(product => (
+                            <S.ProductWrapper>
+                                <CartProducts
+                                    key={product.id}
+                                    id={product.id}
+                                    name={product.name}
+                                    imgSRC={product.imgSRC}
+                                    price={product.price}
+                                    quantityInCart={product.quantityInCart}
+                                />
+                            </S.ProductWrapper>
+                        ))}
+                    </S.ProductsContainer>
+                    <S.ResumeWrapper>
+                        <h2>Resumo</h2>
+                        <p><span>Itens: </span>{products.length}</p>
+                        <p>
+                            <span>Frete:</span>
+                            R$0,00
+                        </p>
+                        <S.TotalValue>
+                            <span>Total:</span>{formatPrice(totalValue)}
+                        </S.TotalValue>
+                        <button>Finalizar compra</button>
+                    </S.ResumeWrapper>
+                </S.CheckoutWrapper>
+                <Link to={"/"}>
+                    <FontAwesomeIcon icon={faLeftLong} />
+                    {"  Continuar comprando"}
+                </Link>
+            </S.Container>
+        </S.CartWrapper>
     )
 }
 
