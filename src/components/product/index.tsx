@@ -1,6 +1,6 @@
 import * as S from "./styles";
 import useCart from "../../hooks/useCart";
-import { formatPrice } from "../../utils/formatPrice";
+import formatPrice from "../../utils/formatPrice";
 
 interface Props {
     id: number
@@ -19,7 +19,7 @@ const Product = ({ name, imgSRC, price, id }: Props) => {
             <S.ProductName>{name}</S.ProductName>
             <S.ProductPrice>{formatPrice(price)}</S.ProductPrice>
             <S.AddToCartButton
-                onClick={() => addToCart({ name, imgSRC, price, id })}>
+                onClick={() => addToCart({ name, imgSRC, price, id, quantityInCart: 0 })}>
                 Adicionar ao carrinho
             </S.AddToCartButton>
         </S.ProductWrapper>

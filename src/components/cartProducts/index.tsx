@@ -1,6 +1,6 @@
 import Product from "../../providers/types/Product";
 import useCart from "../../hooks/useCart";
-import { formatPrice } from "../../utils/formatPrice";
+import formatPrice from "../../utils/formatPrice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import * as S from "./styles";

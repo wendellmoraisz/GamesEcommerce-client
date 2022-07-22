@@ -1,7 +1,7 @@
 import * as S from "./styles";
 import CartProducts from "../cartProducts";
 import useCart from "../../hooks/useCart";
-import { formatPrice } from "../../utils/formatPrice";
+import formatPrice from "../../utils/formatPrice";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLeftLong } from "@fortawesome/free-solid-svg-icons";
