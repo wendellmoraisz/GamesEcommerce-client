@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
 export const Container = styled.header`
-    font-family: sans-serif;
     padding: 0 16px;
+    height: 112px;
     display: flex;
+    background-color: #1c1c1c;
     align-items: center;
     justify-content: space-evenly;
     gap: 32px;
+    margin-bottom: 48px;
 
     a {
         color: #3466AA;
@@ -16,8 +18,8 @@ export const Container = styled.header`
 `;
 
 export const Logo = styled.h1`
-    color: #808080;
-    font-size: 2.8rem;
+    font-family: 'Press Start 2P', sans-serif;
+    color: #3466AA;
     display: flex;
     align-items: center;
     gap: 8px;

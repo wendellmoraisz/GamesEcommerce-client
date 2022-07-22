@@ -37,7 +37,7 @@ export const Container = styled.div`
             color: #fff;
         }
         &:-webkit-autofill {
-        -webkit-box-shadow: 0 0 0 40px #224957 inset;
+        -webkit-box-shadow: 0 0 0 40px #002235 inset;
         -webkit-text-size-adjust: 1.2rem;
         -webkit-text-fill-color: #fff;
         }

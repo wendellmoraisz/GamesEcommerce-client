@@ -8,7 +8,7 @@ export const ProductWrapper = styled.div`
     justify-content: space-between;
     padding: 16px;
     border: solid 1px #eee;
-    border-radius: 8px;
+    /* border-radius: 8px; */
     transition: all .2s ease-in-out;
 
     &:hover{
@@ -36,7 +36,7 @@ export const ProductPrice = styled.p`
 
 export const AddToCartButton = styled.button`
     font-size: 1rem;
-    border-radius: 8px;
+    /* border-radius: 8px; */
     border: none;
     padding: 8px;
     cursor: pointer;
