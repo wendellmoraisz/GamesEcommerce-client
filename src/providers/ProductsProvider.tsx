@@ -9,7 +9,8 @@ export const ProductsContext = createContext<ProductsContextType>({
         name: "",
         imgSRC: "",
         price: 0,
-        quantityInCart: 0
+        quantityInCart: 0,
+        stockQuantity: 0,
     }],
     getProducts: async (urlparam: string = "") => {},
     changeUrlParam: () => {}
@@ -27,7 +28,8 @@ const ProductsProvider = ({ children }: ContextChildrenType) => {
                 name: product.name,
                 imgSRC: product.imgSRC,
                 price: product.price,
-                quantityInCart: 0
+                quantityInCart: 0,
+                stockQuantity: product.stockQuantity,
             }
         )));
     }
