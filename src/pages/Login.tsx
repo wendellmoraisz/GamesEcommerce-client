@@ -1,10 +1,14 @@
-import * as S from "./styles";
+import * as S from "../components/login/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAt, faKey, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faKey, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import styled from "styled-components";
+import useAdminToken from "../hooks/useAdminToken";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+    const navigate = useNavigate();
 
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
@@ -22,6 +26,8 @@ const Login = () => {
     const [invalidLoginOpacity, setInvalidLoginOpacity] = useState("0");
     const ShowLoginErrorMessage = () => setInvalidLoginOpacity("1");
 
+    const { updateAuthToken } = useAdminToken();
+
     const sendLogin = async () => {
         const bodyRequest = { user: userEmail, password: userPassword };
         const result = await fetch("http://localhost:3333/login",{
@@ -32,13 +38,17 @@ const Login = () => {
             body: JSON.stringify(bodyRequest),
         });
 
-        if (!result.ok) ShowLoginErrorMessage();
+        if (!result.ok) return ShowLoginErrorMessage();
+
+        const json = await result.json();
+        updateAuthToken(json.authToken);
+        navigate("/admin/dashboard");
     }
 
     const LoginError = styled.div`
-    padding: 16px;
-    background-color: #EB4747;
-    opacity: ${invalidLoginOpacity};
+        padding: 16px;
+        background-color: #EB4747;
+        opacity: ${invalidLoginOpacity};
     `;
 
     return (
@@ -48,7 +58,7 @@ const Login = () => {
                 <h1>Login</h1>
                 <S.formWrapper>
                     <S.InputWrapper>
-                        <S.IconSpan><FontAwesomeIcon icon={faAt} /></S.IconSpan>
+                        <S.IconSpan><FontAwesomeIcon icon={faUser} /></S.IconSpan>
                         <input type="email" name="email" placeholder="Usuário" onChange={e => setUserEmail(e.target.value)} />
                     </S.InputWrapper>
 
