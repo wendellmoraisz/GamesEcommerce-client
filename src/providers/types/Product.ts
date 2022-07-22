@@ -4,6 +4,7 @@ interface Product {
     imgSRC: string
     price: number
     quantityInCart: number
+    stockQuantity?: number
 }
 
 export default Product;
