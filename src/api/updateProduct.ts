@@ -5,9 +5,9 @@ const updateProduct = async (
     authToken: string,
     bodyRequest: BodyRequest,
     callback: (param: string) => Promise<void>,
-    productId: number): Promise<void> => {
+    productId: number): Promise<boolean> => {
 
-    const result = await fetch(`${baseURL}/${productId}`, {
+    const response = await fetch(`${baseURL}/${productId}`, {
         method: "PUT",
         headers: {
             "Authorization": authToken,
@@ -16,10 +16,9 @@ const updateProduct = async (
         body: JSON.stringify(bodyRequest),
     });
 
-    const json = await result.json();
-    console.log(json);
-
+    if (!response.ok) return false;
     callback("");
+    return true;
 }
 
 export default updateProduct;

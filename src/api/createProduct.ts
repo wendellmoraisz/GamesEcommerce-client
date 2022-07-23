@@ -4,9 +4,9 @@ import BodyRequest from "./types/BodyRequestType";
 const createProduct = async (
     authToken: string,
     bodyRequest: BodyRequest,
-    callback: (param: string) => Promise<void>): Promise<void> => {
+    callback: (param: string) => Promise<void>): Promise<boolean> => {
 
-    const result = await fetch(baseURL, {
+    const response = await fetch(baseURL, {
         method: "POST",
         headers: {
             "Authorization": authToken,
@@ -15,11 +15,9 @@ const createProduct = async (
         body: JSON.stringify(bodyRequest),
     });
 
-    const json = await result.json();
-    console.log(json);
+    if (!response.ok) return false;
     callback("");
-
-    //if (!result.ok) return console.log('erro aaaa');
+    return true;
 }
 
 export default createProduct;

@@ -42,13 +42,20 @@ const CreateProductForm = ({ id, name, imgSRC, price, stockQuantity, isVisible, 
         setProductStock(stockQuantity.toString());
     }, [isVisible]);
 
+    const resetInput = () => {
+        changeVisibility(!isVisible);
+        setRequestResponseMessage("");
+    }
+
+    const [requestResponseMessage, setRequestResponseMessage] = useState("");
+
     return (
         <>
             {
                 isVisible ?
                     <S.Container>
                         <S.FormWrapper >
-                            <S.CloseButton onClick={() => changeVisibility(!isVisible)}>
+                            <S.CloseButton onClick={() => resetInput()}>
                                 <FontAwesomeIcon icon={faXmark} />
                             </S.CloseButton>
                             <p>Nome</p>
@@ -61,10 +68,19 @@ const CreateProductForm = ({ id, name, imgSRC, price, stockQuantity, isVisible, 
                             <p>Estoque</p>
                             <input type="number" value={productStock} onChange={e => setProductStock(e.target.value)} />
 
-                            <div>
-                                <S.ConfirmButton onClick={async () => { productAction(authToken, bodyRequest, getProducts, id) }}>Confirmar</S.ConfirmButton>
-                                <S.CancelButton onClick={() => changeVisibility(!isVisible)}>Cancelar</S.CancelButton>
-                            </div>
+                            <S.FormActionsWrapper>
+                                <p>{requestResponseMessage}</p>
+                                <div>
+
+                                    <S.ConfirmButton onClick={async () => {
+                                        const response = await productAction(authToken, bodyRequest, getProducts, id)
+                                        setRequestResponseMessage(response ? "Solicitação efetuada com sucesso!" : "Algo deu errado");
+                                    }}>
+                                        Confirmar
+                                    </S.ConfirmButton>
+                                    <S.CancelButton onClick={() => resetInput()}>Cancelar</S.CancelButton>
+                                </div>
+                            </S.FormActionsWrapper>
                         </S.FormWrapper >
                     </S.Container>
                     :
