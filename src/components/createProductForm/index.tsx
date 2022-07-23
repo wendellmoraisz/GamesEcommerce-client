@@ -4,6 +4,8 @@ import useProduct from "../../hooks/useProduct";
 import createProduct from "../../api/createProduct";
 import updateProduct from "../../api/updateProduct";
 import * as S from "./styles";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
     id: number
@@ -44,16 +46,27 @@ const CreateProductForm = ({ id, name, imgSRC, price, stockQuantity, isVisible, 
         <>
             {
                 isVisible ?
-                    <S.FormContainer >
-                        <input type="text" value={productName} placeholder="nome" onChange={e => { setProductName(e.target.value) }} />
-                        <input type="number" value={productPrice} placeholder="preço" onChange={e => setProductPrice(e.target.value)} />
-                        <input type="text" value={productImgUrl} placeholder="url da imagem" onChange={e => setProductImgUrl(e.target.value)} />
-                        <input type="number" value={productStock} placeholder="estoque" onChange={e => setProductStock(e.target.value)} />
-                        <div>
-                            <button onClick={() => {productAction(authToken, bodyRequest, getProducts, id)}}>confirmar</button>
-                            <button onClick={() => changeVisibility(!isVisible)}>cancelar</button>
-                        </div>
-                    </S.FormContainer >
+                    <S.Container>
+                        <S.FormWrapper >
+                            <S.CloseButton onClick={() => changeVisibility(!isVisible)}>
+                                <FontAwesomeIcon icon={faXmark} />
+                            </S.CloseButton>
+                            <p>Nome</p>
+                            <input type="text" value={productName} onChange={e => { setProductName(e.target.value) }} />
+                            <p>Preço</p>
+                            <input type="number" value={productPrice} onChange={e => setProductPrice(e.target.value)} />
+                            <p>URL da imagem</p>
+                            <input type="text" value={productImgUrl} onChange={e => setProductImgUrl(e.target.value)} />
+
+                            <p>Estoque</p>
+                            <input type="number" value={productStock} onChange={e => setProductStock(e.target.value)} />
+
+                            <div>
+                                <S.ConfirmButton onClick={async () => { productAction(authToken, bodyRequest, getProducts, id) }}>Confirmar</S.ConfirmButton>
+                                <S.CancelButton onClick={() => changeVisibility(!isVisible)}>Cancelar</S.CancelButton>
+                            </div>
+                        </S.FormWrapper >
+                    </S.Container>
                     :
                     null
             }

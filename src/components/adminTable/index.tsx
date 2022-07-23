@@ -7,6 +7,9 @@ import deleteProduct from "../../api/deleteProduct";
 import useAdminToken from "../../hooks/useAdminToken";
 import createProduct from "../../api/createProduct";
 import updateProduct from "../../api/updateProduct";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan, faPencil, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import formatPrice from "../../utils/formatPrice";
 
 const AdminTable = () => {
 
@@ -14,10 +17,6 @@ const AdminTable = () => {
     const { authToken } = useAdminToken();
 
     const [isVisible, setIsVisible] = useState(false);
-
-    const handleCreateProductFormVisibility = () => {
-        setIsVisible(!isVisible);
-    }
 
     const resetInputValue = {
         name: "",
@@ -47,38 +46,51 @@ const AdminTable = () => {
 
     return (
         <S.Container>
-            <h1>gerenciamento de estoque</h1>
-            <button onClick={() => showForm(resetInputValue, createProduct)}>adicionar novo produto</button>
-            <S.ProductsTable>
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>nome</th>
-                        <th>estoque</th>
-                        <th>preço</th>
-                        <th>url da imagem</th>
-                        <th>ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {products.map(product => {
-                        const { id, name, imgSRC, price, stockQuantity } = product;
-                        return (
-                            <tr>
-                                <td>{id}</td>
-                                <td>{name}</td>
-                                <td>{stockQuantity}</td>
-                                <td>{price}</td>
-                                <td>{imgSRC}</td>
-                                <td>
-                                    <button onClick={() => showForm({ id, name, imgSRC, stockQuantity, price, quantityInCart: 0 }, updateProduct)}>editar</button>
-                                    <button onClick={() => deleteProduct(product.id, authToken, getProducts)}>deletar</button>
-                                </td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </S.ProductsTable>
+            <S.TableCaption>
+                <div>
+                    <h3>Gerenciamento de Estoque</h3>
+                    <S.addButton onClick={() => showForm(resetInputValue, createProduct)}>
+                        <FontAwesomeIcon icon={faCirclePlus} />
+                        Adicionar Produto
+                    </S.addButton>
+                </div>
+            </S.TableCaption>
+            <S.TableWrapper>
+                <S.ProductsTable>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Nome</th>
+                            <th>Estoque</th>
+                            <th>Preço</th>
+                            <th>URL da imagem</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {products.map(product => {
+                            const { id, name, imgSRC, price, stockQuantity } = product;
+                            return (
+                                <tr>
+                                    <td>{id}</td>
+                                    <td>{name}</td>
+                                    <td>{stockQuantity}</td>
+                                    <td>{formatPrice(price)}</td>
+                                    <td>{imgSRC}</td>
+                                    <td>
+                                        <S.EditButton onClick={() => showForm({ id, name, imgSRC, stockQuantity, price, quantityInCart: 0 }, updateProduct)}>
+                                            <FontAwesomeIcon icon={faPencil} />
+                                        </S.EditButton>
+                                        <S.DeleteButton onClick={() => deleteProduct(product.id, authToken, getProducts)}>
+                                            <FontAwesomeIcon icon={faTrashCan} />
+                                        </S.DeleteButton>
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </S.ProductsTable>
+            </S.TableWrapper>
 
             <CreateProductForm
                 productAction={productAction}
