@@ -12,6 +12,7 @@ const ProductsContainer = () => {
                 return (
                     <Product
                         key={product.id}
+                        id={product.id}
                         name={product.name}
                         imgSRC={product.imgSRC}
                         price={product.price}
