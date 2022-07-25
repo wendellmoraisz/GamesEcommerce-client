@@ -14,7 +14,7 @@ const Header = () => {
                 <FontAwesomeIcon icon={faGamepad} />
             </S.Logo>
             <Search />
-            <Link to={"/login"}>
+            <Link to={"/admin"}>
                 <FontAwesomeIcon icon={faUser} />
             </Link>
             <Link to={"/cart"}>
