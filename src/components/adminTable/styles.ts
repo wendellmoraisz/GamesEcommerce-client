@@ -46,7 +46,6 @@ export const TableCaption = styled.div`
     margin-top: 32px;
     width: 1020px;
     box-sizing: border-box;
-    margin-left: -13px;
     
     div {
         display: flex;
@@ -63,7 +62,7 @@ export const Button = styled.button`
     font-size: 1rem;
 `;
 
-export const addButton = styled(Button)`
+export const AddButton = styled(Button)`
     display: flex;
     gap: 8px;
     align-items: center;

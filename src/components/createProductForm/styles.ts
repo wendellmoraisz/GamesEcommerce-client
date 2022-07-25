@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Button } from "../adminTable/styles";
 
 export const Container = styled.div`
@@ -12,6 +12,17 @@ export const Container = styled.div`
     background-color: rgba(0, 0, 0, .7);
 `;
 
+const moveElement = keyframes`
+    0%{
+        opacity: 0;
+        transform: translateY(-32px);
+    }
+    100%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+`;
+
 export const FormWrapper = styled.div`
     width: 500px;
     position: fixed;
@@ -19,18 +30,7 @@ export const FormWrapper = styled.div`
     flex-direction: column;
     padding: 32px;
     background-color: #fff;
-    animation: moveForm .7s normal;
-
-    @keyframes moveForm {
-        0%{
-            opacity: 0;
-            transform: translateY(-32px);
-        }
-        100%{
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
+    animation: ${moveElement} .7s normal;
 
     p {
         margin-top: 16px;
@@ -42,11 +42,13 @@ export const FormWrapper = styled.div`
         font-size: 1.2rem;
         outline: none
     }
+`;
 
-    div {
-        display: flex;
-        justify-content: flex-end;
-    }
+export const FormActionsWrapper = styled.div`
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
 `;
 
 export const CloseButton = styled(Button)`
@@ -54,9 +56,9 @@ export const CloseButton = styled(Button)`
     color: #000;
     font-size: 1.2rem;
     position: absolute;
-    top: 2%;
-    left: 90%;
-`;  
+    top: 1%;
+    left: 93%;
+`;
 
 export const ConfirmButton = styled(Button)`
     background-color: #3CCF4E;

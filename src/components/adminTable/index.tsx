@@ -49,10 +49,10 @@ const AdminTable = () => {
             <S.TableCaption>
                 <div>
                     <h3>Gerenciamento de Estoque</h3>
-                    <S.addButton onClick={() => showForm(resetInputValue, createProduct)}>
+                    <S.AddButton onClick={() => showForm(resetInputValue, createProduct)}>
                         <FontAwesomeIcon icon={faCirclePlus} />
                         Adicionar Produto
-                    </S.addButton>
+                    </S.AddButton>
                 </div>
             </S.TableCaption>
             <S.TableWrapper>

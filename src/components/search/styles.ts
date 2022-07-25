@@ -7,7 +7,6 @@ export const InputContainer = styled.div`
     height: 40px;
     padding: 0 0 0 8px;
     width: 500px;
-    border-radius: 8px;
     overflow: hidden;
     background-color: #fff;
     border: solid 1px #eee;
@@ -17,10 +16,8 @@ export const SearchButton = styled.button`
     background-color: transparent;
     font-size: 1.2rem;
     padding: 8px;
-    //margin-right: -2px;
     border: none;
     cursor: pointer;
-    /* border-radius: 8px; */
     transition: all .3s ease;
 
     &:hover{

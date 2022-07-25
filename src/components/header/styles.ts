@@ -13,6 +13,7 @@ export const Container = styled.header`
     a {
         color: #3466AA;
         font-size: 2rem;
+        text-decoration: none;
         transition: all .3s;
     }
 `;
