@@ -3,9 +3,9 @@ import baseURL from "../utils/apiBaseURL";
 const deleteProduct = async (
     productId: number,
     authToken: string,
-    callback: (param: string) => Promise<void>): Promise<void> => {
+    callback: (param: string) => Promise<void>): Promise<boolean> => {
 
-    const result = await fetch(baseURL, {
+    const response = await fetch(baseURL, {
         method: "DELETE",
         headers: {
             "Authorization": authToken,
@@ -14,10 +14,9 @@ const deleteProduct = async (
         body: JSON.stringify({ id: productId }),
     });
 
-    if (!result.ok) return console.log("erro aqui :(((");
-    const json = result.json();
-    console.log(json);
-    await callback("");
+    if (!response.ok) return false;
+    callback("");
+    return true;
 }
 
 export default deleteProduct;
