@@ -34,7 +34,7 @@ Ter o [Node.js](https://nodejs.org/en/download/) instalado na sua máquina.
 
 # Como rodar o projeto
 
-Primeiramente, inicie o [servidor](https://github.com/wendellmoraisz/GamesEcommerce-server) seguinto suas instruções.
+Primeiramente, inicie o [backend](https://github.com/wendellmoraisz/GamesEcommerce-server) do projeto, seguinto suas instruções.
 
 Feito isso, execute os seguintes passos:
 ```bash
